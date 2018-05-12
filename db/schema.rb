@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_12_140422) do
+ActiveRecord::Schema.define(version: 2018_05_12_190620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,20 +22,23 @@ ActiveRecord::Schema.define(version: 2018_05_12_140422) do
     t.integer "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "endpoint"
+    t.integer "conversion_factor"
+    t.decimal "average_cubic_weight", precision: 10, scale: 5
+    t.string "category"
+    t.index ["endpoint"], name: "index_api_calculations_on_endpoint"
     t.index ["finished"], name: "index_api_calculations_on_finished"
   end
 
   create_table "api_request_logs", force: :cascade do |t|
-    t.string "domain"
     t.string "endpoint"
     t.text "response"
     t.datetime "requested_time"
-    t.string "errors"
+    t.string "request_errors"
     t.integer "api_calculation_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["api_calculation_id"], name: "index_api_request_logs_on_api_calculation_id"
-    t.index ["domain"], name: "index_api_request_logs_on_domain"
   end
 
   create_table "products", force: :cascade do |t|
@@ -48,6 +51,7 @@ ActiveRecord::Schema.define(version: 2018_05_12_140422) do
     t.decimal "cubic_weight", precision: 10, scale: 5
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "weight", precision: 10, scale: 5, default: "0.0"
     t.index ["category"], name: "index_products_on_category"
   end
 

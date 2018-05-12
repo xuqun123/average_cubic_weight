@@ -1,0 +1,7 @@
+<% if @api_calculation.errors.present? %>
+	  $("form").html("<%=j render 'form'%>");
+<% else %>
+	$(".invalid-feedback").remove();
+	$("input").removeClass("is-invalid");
+  $("#latest-calculation").html("<%=j render 'api_calculations/api_calculation', api_calculation: ApiCalculation.order('start_time DESC').first %>");	
+<% end %>

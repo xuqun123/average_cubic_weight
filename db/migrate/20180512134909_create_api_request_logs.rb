@@ -5,7 +5,7 @@ class CreateApiRequestLogs < ActiveRecord::Migration[5.2]
       t.string :endpoint
       t.text :response
       t.datetime :requested_time
-      t.string :errors
+      t.string :request_errors
 			t.integer :api_calculation_id      
 
       t.timestamps

@@ -1,2 +1,22 @@
-%h1 Products#index
-%p Find me in app/views/products/index.html.haml
+.container
+  .mt-3
+  .table-responsive.mt-3.mb-3
+    %table.table.table-striped.table-sm
+      %thead
+        %tr
+        %th Title
+        %th Category
+        %th Length (m)
+        %th Width (m)
+        %th Height (m)
+        %th Volume (cubic meter)
+      %tbody
+        - Product.order("category asc").each do |product|
+          %tr
+          %td= product.title
+          %td= product.category
+          %td= product.length.to_f
+          %td= product.width.to_f
+          %td= product.height.to_f
+          %td= product.volume.to_f
+  %hr.mb-4   	

@@ -1,0 +1,11 @@
+= simple_form_for @api_calculation, remote: true do |f|
+  .row
+    .col-md-8.mb-3
+      = f.input :endpoint, placeholder: "Enter a valid api endpoint", input_html: {value: @api_calculation.errors[:endpoint].present? ? @api_calculation.endpoint : (@api_calculation.endpoint || "http://wp8m3he1wt.s3-website-ap-southeast-2.amazonaws.com/api/products/1")}
+    .col-md-2.mb-3
+      = f.input :conversion_factor, placeholder: "Enter an standard conversion factor", input_html: {value: @api_calculation.errors[:conversion_factor].present? ? @api_calculation.conversion_factor : (@api_calculation.conversion_factor || 250)}
+    .col-md-2.mb-3
+      = f.input :category, placeholder: "Enter an category", input_html: {value: @api_calculation.errors[:category].present? ? @api_calculation.category : (@api_calculation.category || "Air Conditioners")}      
+
+  %hr.mb-4
+    = f.button :submit, "Request and calculate", id: "submit-btn", class: 'btn-danger btn-lg btn-block w-50 mx-auto mb-3', data: {disable_with: 'Please Wait ...'}  
