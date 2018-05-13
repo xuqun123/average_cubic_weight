@@ -29,7 +29,11 @@ class ApiCalculation < ApplicationRecord
 		self.duration = end_time - start_time
 		self.save(validate: false)
 
-		average_cubic_weight
+    if category.present?
+      ActionCable.server.broadcast "api_request_notifications_channel", weight: "#{average_cubic_weight} kg", category: category
+    else
+      ActionCable.server.broadcast "api_request_notifications_channel", weight: "#{average_cubic_weight} kg"
+    end
 	rescue
   end
 end

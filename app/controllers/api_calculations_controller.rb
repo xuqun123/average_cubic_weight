@@ -7,7 +7,10 @@ class ApiCalculationsController < ApplicationController
     @api_calculation  = ApiCalculation.new api_calculation_params
     @api_calculation.finished = false
 
-    @api_calculation.compute if @api_calculation.save
+    ApiRequestWorker.perform_async(@api_calculation.id) if @api_calculation.save
+  end
+
+  def reload
   end
 
   private

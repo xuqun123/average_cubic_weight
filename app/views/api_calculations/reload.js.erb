@@ -1,0 +1,5 @@
+$("#latest-calculation").html("<%=j render 'api_calculations/api_calculation', api_calculation: ApiCalculation.order('created_at DESC').first %>"); 
+
+$('form input').prop('disabled', false);
+$('form').prop('disabled', false);
+$('#submit-btn').prop('value', 'Request and calculate');

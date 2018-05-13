@@ -1,14 +1,16 @@
 %body
   .pt-md-5.pb-md-5.mx-auto.text-center
     %h1.display-4 Cubic Weight Challenge
-    %p.lead Using a provided (paginated) API, find the average cubic weight for all products in a specific category.
+    %p.lead Using a provided (paginated) API, find the average cubic weight for all products in a specific category.    
+    #average-cubic-weight.container
 
   .container
     .row
       .col-md-12= render 'form'
+
     %hr
 
     .row
       #latest-calculation.col-md-12    
         - if ApiCalculation.count > 0
-          = render 'api_calculations/api_calculation', api_calculation: ApiCalculation.order('start_time DESC').first
+          = render 'api_calculations/api_calculation', api_calculation: ApiCalculation.order('created_at DESC').first

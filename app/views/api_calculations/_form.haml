@@ -8,4 +8,11 @@
       = f.input :category, placeholder: "Enter an category", input_html: {value: @api_calculation.errors[:category].present? ? @api_calculation.category : (@api_calculation.category || "Air Conditioners")}      
 
   %hr.mb-4
-    = f.button :submit, "Request and calculate", id: "submit-btn", class: 'btn-danger btn-lg btn-block w-50 mx-auto mb-3', data: {disable_with: 'Please Wait ...'}  
+    = f.button :submit, "Request and calculate", id: "submit-btn", class: 'btn-danger btn-lg btn-block w-50 mx-auto mb-3', data: {disable_with: 'Please Wait ...'}
+
+
+- if !ApiCalculation.all_finished?
+  :javascript
+    $("form").prop("disabled", true);
+    $("form input").prop("disabled", true);
+    $("#submit-btn").prop("value", "Processing...");
