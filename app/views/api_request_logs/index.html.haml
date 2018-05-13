@@ -1,5 +1,8 @@
 .container
   .mt-3
-  - ApiCalculation.order('created_at DESC').each do |api_calculation|
+  .row
+    .text-center.mx-auto.mb-3.mt-3= paginate @api_calculations
+  - @api_calculations.each do |api_calculation|
     = render 'api_calculations/api_calculation', api_calculation: api_calculation
     %hr.mb-4 
+

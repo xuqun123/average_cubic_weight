@@ -4,9 +4,11 @@ class ApiCalculationsController < ApplicationController
   end
 
   def create
+    #record a calculate execution  
     @api_calculation  = ApiCalculation.new api_calculation_params
     @api_calculation.finished = false
 
+    #run actual API requests and related calculation in backend job
     ApiRequestWorker.perform_async(@api_calculation.id) if @api_calculation.save
   end
 

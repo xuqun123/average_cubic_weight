@@ -1,37 +1,38 @@
-.row.text-center
-  .col-md-5
-    .card
-      .card-body
-        %h5.card-title Initial Endpoint
-        %p= api_calculation.endpoint
-  .col-md-2              
-    .card
-      .card-body
-        %h5.card-title Conversion factor
-        %p= api_calculation.conversion_factor
-  .col-md-2                            
-    .card
-      .card-body
-        %h5.card-title Category
-        %p= api_calculation.category               
-  .col-md-3                                          
-    .card
-      .card-body
-        %h5.card-title Average Cubic Weight (kg)
-        %p= api_calculation.average_cubic_weight                                    
+- if api_calculation
+  .row.text-center
+    .col-md-5
+      .card
+        .card-body
+          %h5.card-title Initial Endpoint
+          %p= api_calculation.endpoint
+    .col-md-2              
+      .card
+        .card-body
+          %h5.card-title Conversion factor
+          %p= api_calculation.conversion_factor
+    .col-md-2                            
+      .card
+        .card-body
+          %h5.card-title Category
+          %p= api_calculation.category               
+    .col-md-3                                          
+      .card
+        .card-body
+          %h5.card-title Average Cubic Weight (kg)
+          %p= api_calculation.average_cubic_weight                                    
 
-  .table-responsive.mt-3.mb-3
-  %table.table.table-striped.table-sm
-    %thead
-      %tr
-        %th Endpoint
-        %th Request Time
-        %th Response
-        %th Errors
-    %tbody
-      - api_calculation.api_request_logs.order("created_at asc").each do |api_request_log|
+    .table-responsive.mt-3.mb-3
+    %table.table.table-striped.table-sm
+      %thead
         %tr
-          %td= api_request_log.endpoint
-          %td= api_request_log.requested_time.try(:in_time_zone, 'Melbourne').try(:strftime, '%Y-%m-%d %H:%M')
-          %td= api_request_log.response
-          %td= api_request_log.request_errors
+          %th Endpoint
+          %th Request Time
+          %th Response
+          %th Errors
+      %tbody
+        - api_calculation.api_request_logs.order("created_at asc").each do |api_request_log|
+          %tr
+            %td= api_request_log.endpoint
+            %td= api_request_log.requested_time.try(:in_time_zone, 'Melbourne').try(:strftime, '%Y-%m-%d %H:%M')
+            %td= api_request_log.response
+            %td= api_request_log.request_errors

@@ -11,7 +11,7 @@
         %th Height (m)
         %th Volume (cubic meter)
       %tbody
-        - Product.order("category asc").each do |product|
+        - @products.each do |product|
           %tr
           %td= product.title
           %td= product.category
